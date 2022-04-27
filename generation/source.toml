@@ -1,0 +1,87 @@
+lib_name = "Ade78xx"
+description = "SPI Driver for the ADE78xxA Energy Metering IC"
+endian = "big"
+address_type = "u16"
+datasheet_path = "https://www.analog.com/media/en/technical-documentation/data-sheets/ade7854a_7858a_7868a_7878a.pdf"
+
+[[registers]]
+name = "AIGAIN"
+description = "Phase A current gain adjust"
+address = "0x4380"
+default = 0
+writable = true
+comm_length = "32ZPSE"
+type = "i32"
+
+[[registers]]
+name = "CONFIG"
+description = "ADE7878A configuration register"
+address = "0xE618"
+default = 0
+writable = true
+comm_length = "16"
+type = "u16"
+datasheet = "Table 46"
+
+  [[registers.struct_members]]
+  name = "INTEN"
+  description = "Integrator enable. When this bit is set to 1, INTEN enables the internal digital integrator"
+  default = 0
+  bits = "0"
+  type = "bool"
+
+  [[registers.struct_members]]
+  name = "SWAP"
+  description = "Setting this bit to 1 swaps the voltage channel outputs with the current channel outputs."
+  default = 0
+  bits = "3"
+  type = "bool"
+
+  [[registers.struct_members]]
+  name = "MOD1SHORT"
+  description = "When this bit is set to 1, the voltage channel ADCs behave as if the voltage channel inputs were grounded."
+  default = 0
+  bits = "4"
+  type = "bool"
+
+  [[registers.struct_members]]
+  name = "MOD2SHORT"
+  description = "When this bit is set to 1, the current channel ADCs behave as if the current channel inputs were grounded."
+  default = 0
+  bits = "5"
+  type = "bool"
+
+  [[registers.struct_members]]
+  name = "HSDCEN"
+  description = "Setting this bit to 1 enables the HSDC serial port, and the HSCLK functionality is chosen at the CF3/HSCLK pin"
+  default = 0
+  bits = "6"
+  type = "bool"
+
+  [[registers.struct_members]]
+  name = "SWRST"
+  description = "Setting this bit to 1 initiates a software reset. "
+  default = 0
+  bits = "7"
+  type = "bool"
+
+  [[registers.struct_members]]
+  name = "VTOIA"
+  description = "These bits determine the phase voltage together with Phase A current in the power path."
+  default = 0
+  bits = "9:8"
+  type = "u8"
+
+  [[registers.struct_members]]
+  name = "VTOIB"
+  description = "These bits determine the phase voltage together with Phase B current in the power path. "
+  default = 0
+  bits = "11:10"
+  type = "u8"
+
+  [[registers.struct_members]]
+  name = "VTOIC"
+  description = "These bits determine the phase voltage together with Phase C current in the power path."
+  default = 0
+  bits = "13:12"
+  type = "u8"
